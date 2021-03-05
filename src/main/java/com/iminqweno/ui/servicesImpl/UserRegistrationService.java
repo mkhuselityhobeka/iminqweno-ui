@@ -1,24 +1,21 @@
 package com.iminqweno.ui.servicesImpl;
 
+import com.iminqweno.ui.config.JmsMessageConverterConfig;
 import com.iminqweno.ui.dto.UserRegistrationDTO;
 import com.iminqweno.ui.services.UserRegistrationInterface;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.XSlf4j;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRegistrationService {
-
-    private UserRegistrationInterface userRegistrationInterface;
+@RequiredArgsConstructor
+public class UserRegistrationService implements UserRegistrationInterface{
 
     final JmsTemplate jmsTemplate;
 
-    public UserRegistrationService(UserRegistrationInterface userRegistrationInterface, JmsTemplate jmsTemplate){
-        this.userRegistrationInterface = userRegistrationInterface;
-
-        this.jmsTemplate = jmsTemplate;
-    }
-
-    public void saveUserRegistration(UserRegistrationDTO userRegistrationDTO){
-        jmsTemplate.convertAndSend("UserRegistration_Queue",userRegistrationDTO);
+    @Override
+    public void sendMessageToUserRegistrationQ(UserRegistrationDTO userRegistrationDTO) {
+        jmsTemplate.convertAndSend(JmsMessageConverterConfig.UserRegistration_Queue,userRegistrationDTO);
     }
 }
