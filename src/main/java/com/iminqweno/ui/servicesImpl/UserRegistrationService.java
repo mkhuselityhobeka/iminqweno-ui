@@ -15,7 +15,8 @@ public class UserRegistrationService implements UserRegistrationInterface{
     final JmsTemplate jmsTemplate;
 
     @Override
-    public void sendMessageToUserRegistrationQ(UserRegistrationDTO userRegistrationDTO) {
+    public UserRegistrationDTO sendMessageToUserRegistrationQ(UserRegistrationDTO userRegistrationDTO) {
         jmsTemplate.convertAndSend(JmsMessageConverterConfig.UserRegistration_Queue,userRegistrationDTO);
+        return userRegistrationDTO;
     }
 }
