@@ -82,6 +82,17 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.5.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-data-rest</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+        <!--Hibernate -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.18.Final</version>
+        </dependency>
     </dependencies>
 <!--Plugins-->
     <build>
@@ -98,21 +109,21 @@
                     </execution>
                     <execution>
                         <id>post-integration-test</id>
-                        <goals>stop</goals>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
                     </execution>
                 </executions>
                 <configuration>
+                    <apiDocUrl>http://localhost:8081/swagger-ui-iminqweno.html</apiDocUrl>
+                    <outputFileName>iminqweno.json</outputFileName>
+                    <outputDir>${project.build.directory}</outputDir>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                </configuration>
-                <configuration>
-                    <apiDocUrl>http://localhost:8081/swagger-ui-iminqweno.html</apiDocUrl>
-                    <outputFileName>iminqweno.json</outputFileName>
-                    <outputDir>${project.build.directory}</outputDir>
                 </configuration>
             </plugin>
         </plugins>
