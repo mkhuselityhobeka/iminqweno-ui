@@ -18,7 +18,6 @@ public class UserRegistrationControllerTest {
     @Autowired
     TestRestTemplate testRestTemplate;
 
-
     @Test
     public void testSendUserRegistrationMessage(){
         UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO("d","g","c","");
